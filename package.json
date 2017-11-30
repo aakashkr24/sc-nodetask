@@ -12,6 +12,7 @@
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "json-patch": "^0.7.0",
     "lodash": "^4.17.4",
     "morgan": "^1.9.0",
     "sharp": "^0.18.4"

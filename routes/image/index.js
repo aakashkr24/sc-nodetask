@@ -4,8 +4,16 @@ var axios = require("axios");
 
 var image = require("./image");
 
+/** @exports Image/Middleware */
 module.exports = {
 
+    /**
+     * Express middleware to generate a thumbnail
+     * @param {Object} req HTTP request object
+     * @param {String} req.url Url of image to resize
+     * @param {Object} res HTTP response object
+     * @param {Object} next Express next callback function
+     */
     thumbnail: function thumbnail (req, res, next) {
 
         var url = req.query.url;
