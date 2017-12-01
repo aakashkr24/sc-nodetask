@@ -26,3 +26,6 @@ app.use(function(req, res, next) {
 });
 
 app.listen(PORT, () => {console.log(`App stared at port ${PORT}`);});
+
+// For running test
+module.exports = app;
