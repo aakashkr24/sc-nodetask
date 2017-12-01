@@ -28,13 +28,19 @@ module.exports = {
         .then((res) => {
             headers = res.headers;
 
-            if (headers["Content-Type"].indexof('image') == -1) {
+            // checking content type.
+            if ((headers['content-type'] || headers["Content-Type"]).indexOf('image') == -1) {
                 throw new Error("URL provided is not image type");
+            }
+            
+            // allowing operations for image upto 3mb
+            if ((headers['content-length'] || headers["Content-Length"]) > 3 * 1024 * 1024) {
+                throw new Error("Image too Big");
             }
         })
         .then(() => axios.get(url, {responseType: 'arraybuffer'}))
         .then(function(res) {
-            return image.resize(res, {width: 50, height: 50}, 'white');
+            return image.resize(res.data, {width: 50, height: 50}, 'white');
         })
         .then((buffer) => {
 
