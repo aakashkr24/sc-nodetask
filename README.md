@@ -11,6 +11,16 @@ npm start #To Run the Application
 
 npm test #To Run the Test Suite
 
+## Application Port & Sample Curls
+
+Application runs on PORT 4096. Change PORT with NODE_ENV.PORT
+
+Sample Curls:
+* Login: curl -X POST http://localhost:4096/login -d 'username=aaa&password=bbbbbbbbbbb'
+* JSON Patch: curl -X PUT http://localhost:4096/jsonpatch -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MTIxMjkzMTQsImV4cCI6MTUxMjEyOTkxNH0.WJwmJuv7e0t-pDyvqu369nxfIJml5QrLeHGEtHz_HKw' -H 'content-type: application/json' -d '{"json" : {},"patch": [{"op": "add", "path": "/foo", "value": "bar"}]}'
+* Thumbnail: curl -X GET 'http://localhost:4096/thumbnail?url=https%3A%2F%2Fblog.socialcops.com%2Fwp-content%2Fuploads%2F2015%2F11%2FPicture1-1100x496.jpg' -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MTIxMjM2NTYsImV4cCI6MTUxMjEyNDI1Nn0.pyUKUu9Xiw0DpAh0VXuPzPDgLOcd0_GIEfuGGXmftbw' 
+
+
 ## APIs (available routes)
 
 ### 1. **Login**:
