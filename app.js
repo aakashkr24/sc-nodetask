@@ -7,15 +7,18 @@ var expressJWT = require("express-jwt");
 
 var app = express();
 
-var PORT = 2048;
+var PORT = 4096;
 
 app.set('port', PORT);
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded());
-app.use(expressJWT({secret: "Social Cops"}).unless({path: ['/login']}));
 
 app.use(logger("tiny"));
+
+app.use('/static', express.static(require("path").join(__dirname, 'public')));
+
+app.use(expressJWT({secret: "Social Cops"}).unless({path: ['/login']}));
 
 app.use(express.Router());
 
@@ -25,7 +28,9 @@ app.use(function(req, res, next) {
     return res.sendStatus(404);
 });
 
-app.listen(PORT, () => {console.log(`App stared at port ${PORT}`);});
-
+// Do not start server for test mode
+if (process.env.NODE_ENV != "TEST") {
+    app.listen(PORT, () => {console.log(`App stared at port ${PORT}`);});    
+}
 // For running test
 module.exports = app;
