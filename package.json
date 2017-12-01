@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "jest --config ./jest.config.js"
+    "test": "NODE_ENV=TEST jest --config ./jest.config.js",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
