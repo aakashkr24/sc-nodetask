@@ -3,6 +3,7 @@
 var logger = require("morgan");
 var express = require("express");
 var bodyparser = require("body-parser");
+var expressJWT = require("express-jwt");
 
 var app = express();
 
@@ -12,6 +13,7 @@ app.set('port', PORT);
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded());
+app.use(expressJWT({secret: "Social Cops"}).unless({path: ['/login']}));
 
 app.use(logger("tiny"));
 
