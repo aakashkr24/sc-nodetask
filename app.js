@@ -7,7 +7,7 @@ var expressJWT = require("express-jwt");
 
 var app = express();
 
-var PORT = 4096;
+var PORT = process.env.PORT || 4096;
 
 app.set('port', PORT);
 
