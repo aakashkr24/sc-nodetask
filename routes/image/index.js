@@ -4,6 +4,8 @@ var axios = require("axios");
 
 var image = require("./image");
 
+var HTTP = require("../../constants").HTTP;
+
 /** @exports Image/Middleware */
 module.exports = {
 
@@ -25,6 +27,10 @@ module.exports = {
         axios.head(url)
         .then((res) => {
             headers = res.headers;
+
+            if (headers["Content-Type"].indexof('image') == -1) {
+                throw new Error("URL provided is not image type");
+            }
         })
         .then(() => axios.get(url, {responseType: 'arraybuffer'}))
         .then(function(res) {
@@ -38,10 +44,15 @@ module.exports = {
                 'Content-Disposition': "attachment; filename=\"thumbnail.jpg\""
             });
 
-            res.status(200).end(buffer);
+            res.status(HTTP.OK).end(buffer);
         })
         .catch((err) => {
-            console.log(err);
+            
+            res.status(HTTP.BAD_REQUEST).json({
+                name: "INVALID_IMAGE",
+                message: err.message || "Invalid image resource"
+            });
+
         });
 
     }

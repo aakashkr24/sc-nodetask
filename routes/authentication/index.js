@@ -2,6 +2,8 @@
 
 var jwt = require("jsonwebtoken");
 
+var HTTP = require("../../constants").HTTP;
+
 /** @exports  Authentication/Middleware*/
 module.exports = {
 
@@ -20,8 +22,10 @@ module.exports = {
         var password = req.body.password;
 
         if (!username || !password) {
-            return res.status(400).json({
-                message: "Both username and password are required"
+            
+            return res.status(HTTP.BAD_REQUEST).json({
+                name: "MISSING_REQUIRED_FIELDS_LOGIN",
+                message: "Fields username and password are required"
             });
         }
 
@@ -42,7 +46,12 @@ module.exports = {
         // token expires in 10 minutes
         var token = jwt.sign({username: req.username, password: req.password}, "Social Cops", {expiresIn: 10 * 60});
 
-        return res.status(200).json({token});
+        return res.status(HTTP.OK).json({
+            message: "User Authentication Successful",
+            response: {
+                token: token
+            }
+        });
     }
 
 
